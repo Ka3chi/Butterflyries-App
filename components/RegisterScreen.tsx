@@ -1,28 +1,20 @@
-import {View, StyleSheet, Image} from 'react-native';
+import * as React from "react";
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {Button} from 'react-native-elements';
 import {Provider as PaperProvider, TextInput} from 'react-native-paper';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
 
-import * as React from "react";
-import { blueGrey900, transparent } from 'react-native-paper/lib/typescript/styles/colors';
+const RegSchema = Yup.object({
+    lastname: Yup.string().required().label("Last Name"),
+    firstname: Yup.string().required().label("First Name"),
+    birthday: Yup.string().required().label("Birth Day"),
+    email: Yup.string().required().email().label("Email"),
+    password: Yup.string().required().label("Password"),
+    confirmpassword: Yup.string().required().label("Confirm Password").oneOf([Yup.ref('password')], 'Your password does not match.')
+})
 
-
-
-
-
-interface IProps {
-    title?: any;
-    label?: string;
-
-    
-}
-export default function LoginScreen(props: IProps) {
-
-const [Lastname, setLN] = React.useState("");
-const [Firstname, setFN] = React.useState("");
-const [Birthday, setBday] = React.useState("");
-const [Email, setEmail] = React.useState("");
-const [Password, setPass] = React.useState("");
-const [ConfirmPassword, setConfirmPass] = React.useState("");
+export default function LoginScreen() {
 
     return(
         <View style= {styles.container}>
@@ -32,38 +24,58 @@ const [ConfirmPassword, setConfirmPass] = React.useState("");
                 source={{ uri: 'https://i.pinimg.com/originals/f0/40/f0/f040f07ac0ad09cc155ecc4bbface15a.jpg' }}
                 style={styles.BGIMAGE}
             />
+
+            <Formik 
+            initialValues = { {email: '', password: '', firstname: '', lastname: '', birthday: '', confirmpassword: '',}}
+            onSubmit = {values => console.log(values)}
+            validationSchema ={RegSchema}
+            >
+                { ({handleChange, handleSubmit, errors}) => (
+                    <>
             <TextInput style={styles.Layout}
                 placeholder='Last Name'
-                value={Lastname}
-                onChangeText={Lastname => setLN(Lastname)}
+                autoComplete={false}
+                onChangeText={handleChange("lastname")}
             />
+            <Text style={styles.Texterror}>{errors.lastname}</Text>
             <TextInput style={styles.Layout}
                 placeholder='First Name'
-                value={Firstname}
-                onChangeText={Firstname => setFN(Firstname)}
+                autoComplete={false}
+                onChangeText={handleChange("firstname")}
             />
+            <Text style={styles.Texterror}>{errors.firstname}</Text>
             <TextInput style={styles.Layout}
                 placeholder='Birthday'
-                value={Birthday}
-                onChangeText={Birthday => setBday(Birthday)}
+                autoComplete={false}
+                onChangeText={handleChange("birthday")}
             />
+            <Text style={styles.Texterror}>{errors.birthday}</Text>
             <TextInput style={styles.Layout}
-                placeholder='Birthday'
-                value={Email}
-                onChangeText={Email => setEmail(Email)}
-                placeholder='Email Address'
+                placeholder='Email'
+                autoComplete={false}
+                onChangeText={handleChange("email")}
             />
+            <Text style={styles.Texterror}>{errors.email}</Text>
             <TextInput secureTextEntry = {true} style={styles.Layout}
                 placeholder='Password'
-                value={Password}
-                onChangeText={Password => setPass(Password)}
+                autoComplete={false}
+                onChangeText={handleChange("password")}
             />
+            <Text style={styles.Texterror}>{errors.password}</Text>
             <TextInput secureTextEntry = {true} style={styles.Layout}
-                placeholder='Confirm Password'
-                value={ConfirmPassword}
-                onChangeText={ConfirmPassword => setConfirmPass(ConfirmPassword)}
+               placeholder='Confirm Password'
+               autoComplete={false}
+               onChangeText={handleChange("confirmpassword")}
             />
-            <Button title='Register'  buttonStyle={styles.Register} />
+            <Text style={styles.Texterror}>{errors.confirmpassword}</Text>
+            <Button 
+            title='Register' 
+            buttonStyle={styles.Register}
+            onPress={handleSubmit}
+            />
+                    </>
+                )}
+            </Formik>
             </View>
         </View>
 
@@ -73,7 +85,6 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         flexDirection: 'column',
-        overflow: 'scroll'
     },
     RegLayout:{
         backgroundColor: 'transparent',
@@ -88,7 +99,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '70%',
         borderColor: 'black',
-        marginBottom: 20
+        marginTop: 10
     },
     Register: {
         backgroundColor: 'blue',
@@ -107,4 +118,9 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
     },
+    Texterror:{
+        textAlign: 'left',
+        color: '#ff7538'
+
+    }
 })
