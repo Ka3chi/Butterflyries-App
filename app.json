@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "Activity 3",
-    "slug": "activity-3",
+    "name": "Butterflyries",
+    "slug": "Butterflyries",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo2.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logo2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#18161B"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,10 +23,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/logo2.png",
+        "backgroundColor": "#18161B"
       },
-      "package": "com.jrparreno.activity3"
+      "package": "com.Butterflyries.RellesGroup"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

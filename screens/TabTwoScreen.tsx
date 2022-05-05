@@ -7,8 +7,9 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 
-export default function TabTwoScreen({ navigation }: RootTabScreenProps<'TabTwo'>) {
+export default function TabTwoScreen() {
   return (
-    <LoginScreen/>
+      
+    
   );
 }

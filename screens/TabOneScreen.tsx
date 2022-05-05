@@ -1,14 +1,15 @@
 import { processFontFamily } from 'expo-font';
 import { Dimensions, Image, StyleSheet } from 'react-native';
+import * as React from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import RegisterScreen from '../components/RegisterScreen';
-import { Text, View } from '../components/Themed';
+// import Homepage from '../components/Homepage';
+
 import { RootTabScreenProps } from '../types';
+import { NavigationContainer } from '@react-navigation/native';
 
-
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function TabOneScreen() {
   return (
-    <RegisterScreen/>
+      
+    
   );
 }
